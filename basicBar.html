@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>First Echarts</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@5.0.0/dist/echarts.min.js"></script>
+</head>
+<body>
+	<div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            // 标题
+            title: {
+                text: 'ECharts 入门示例',
+                subtext:'small title'
+            },
+            // 提示框
+            tooltip: {},
+            // 图例说明，分别对应两列
+            legend: {
+                data:['销量', '价格'],
+                left: 200
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {
+                        title: '保存图片',
+                        type: 'jpeg'
+                    },
+                    // 数据视图工具
+                    // 数据视图工具，可以展现当前图表所用的数据，编辑后可以动态更新
+                    dataView: {},
+                    restore: {},
+                    // 允许缩放
+                    dataZoom: {},
+                    // 动态类型切换 
+                    magicType: {
+                        type: ['line','stack','tiled']
+                    },
+                    // 提示框
+                    tooltip: {
+                        // 坐标轴触发
+                        trigger: 'axis'
+                    }
+                }
+            },
+            xAxis: {
+                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+            },
+            yAxis: {
+                name: '数量',
+                // splitNumber: 10 //分割数量
+                interval: 10 // 设置间距
+            },
+            // 系列列表，比如每个分别有两列，销量和价格
+            series: [{
+                name: '销量',
+                type: 'bar',
+                // data: [5, 20, 36, 10, 10, 20]
+                // 二维的效果和上面的相等，只是省略了index
+                data: [[0,5], 
+                        [1, 20], 
+                        [2, 36], 
+                        [3, 10], 
+                        [4, 10], 
+                        [5, 20]],
+                // 标记点
+                markPoint: {
+                    data: [
+                        {type: 'max'},
+                        {type: 'min'}
+                    ],
+                    itemStyle: {
+                        color: 'pink'
+                    }
+                }
+            },
+            {
+                name: '价格',
+                type: 'bar',
+                data: [30, 60, 36, 30, 20, 27],
+                // 标记线
+                markLine: {
+                    data: [
+                        {type: 'average'}
+                    ]
+                }
+            },
+
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
